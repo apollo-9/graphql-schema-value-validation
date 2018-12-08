@@ -4,7 +4,6 @@
   "description": "Exposes custom directives for doing validation in your schema",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test",
     "format": "npm run prettier --write \"**/*.js\"",
     "prettier": "prettier \"**/*.js\"",
     "lint": "eslint .",
