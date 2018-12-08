@@ -1,0 +1,18 @@
+{
+  "name": "graphql-schema-value-validation",
+  "version": "0.0.1",
+  "description": "Exposes custom directives for doing validation in your schema",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "url": "https://github.com/apollo-9/graphql-schema-value-validation"
+  },
+  "author": "Apollo9",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^1.15.3"
+  },
+  "dependencies": {}
+}
