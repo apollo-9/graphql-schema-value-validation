@@ -1,6 +1,6 @@
-const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
-const { SchemaDirectiveVisitor } = require("graphql-tools");
-const validator = require("validator");
+const { GraphQLNonNull, GraphQLScalarType } = require('graphql');
+const { SchemaDirectiveVisitor } = require('graphql-tools');
+const validator = require('validator');
 
 class LengthDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -51,19 +51,25 @@ class LimitedLengthType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-        if (!validator.isLength(value, { min: minLength, max: maxLength })) {
-          throw new Error(
-            `Field's length must be between ${minLength} and ${maxLength} characters`
-          );
-        }
+        validate(value, minLength, maxLength);
 
         return type.parseValue(value);
       },
 
       parseLiteral(ast) {
+        validate(ast.value, minLength, maxLength);
+
         return type.parseLiteral(ast);
       }
     });
+  }
+}
+
+function validate(value, minLength, maxLength) {
+  if (!validator.isLength(value, { min: minLength, max: maxLength })) {
+    throw new Error(
+      `Field's length must be between ${minLength} and ${maxLength} characters`
+    );
   }
 }
 

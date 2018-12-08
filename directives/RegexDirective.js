@@ -1,7 +1,7 @@
-const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
-const { SchemaDirectiveVisitor } = require("graphql-tools");
+const { GraphQLNonNull, GraphQLScalarType } = require('graphql');
+const { SchemaDirectiveVisitor } = require('graphql-tools');
 
-const validator = require("validator");
+const validator = require('validator');
 
 class RegexDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -40,17 +40,23 @@ class RegexType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-        if (!validator.matches(value, pattern)) {
-          throw new Error(`Field doesn't match given pattern`);
-        }
+        validate(value, pattern);
 
         return type.parseValue(value);
       },
 
       parseLiteral(ast) {
+        validate(ast.value, pattern);
+
         return type.parseLiteral(ast);
       }
     });
+  }
+}
+
+function validate(value, pattern) {
+  if (!validator.matches(value, pattern)) {
+    throw new Error(`Field doesn't match given pattern`);
   }
 }
 

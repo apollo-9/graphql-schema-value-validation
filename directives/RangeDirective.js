@@ -1,5 +1,5 @@
-const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
-const { SchemaDirectiveVisitor } = require("graphql-tools");
+const { GraphQLNonNull, GraphQLScalarType } = require('graphql');
+const { SchemaDirectiveVisitor } = require('graphql-tools');
 
 class RangeDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -46,19 +46,25 @@ class RangeType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-        if (value >= minValue && value < maxValue) {
-          return type.parseValue(value);
-        } else {
-          throw new Error(
-            `Field's value should be between ${minValue} and ${maxValue}`
-          );
-        }
+        validate(value, minValue, maxValue);
+
+        return type.parseValue(value);
       },
 
       parseLiteral(ast) {
+        validate(ast.value, minValue, maxValue);
+
         return type.parseLiteral(ast);
       }
     });
+  }
+}
+
+function validate(value, minValue, maxValue) {
+  if (!(value >= minValue && value < maxValue)) {
+    throw new Error(
+      `Field's value should be between ${minValue} and ${maxValue}`
+    );
   }
 }
 

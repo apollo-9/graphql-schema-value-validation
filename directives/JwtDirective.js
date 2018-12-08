@@ -1,7 +1,7 @@
-const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
-const { SchemaDirectiveVisitor } = require("graphql-tools");
+const { GraphQLNonNull, GraphQLScalarType } = require('graphql');
+const { SchemaDirectiveVisitor } = require('graphql-tools');
 
-const validator = require("validator");
+const validator = require('validator');
 
 class JwtDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -40,17 +40,23 @@ class JwtType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-        if (!validator.isJWT(value)) {
-          throw new Error("JWT not valid");
-        }
+        validate(value);
 
         return type.parseValue(value);
       },
 
       parseLiteral(ast) {
+        validate(ast.value);
+
         return type.parseLiteral(ast);
       }
     });
+  }
+}
+
+function validate(value) {
+  if (!validator.isJWT(value)) {
+    throw new Error('JWT not valid');
   }
 }
 
