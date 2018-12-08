@@ -1,9 +1,4 @@
-const {
-  GraphQLNonNull,
-  GraphQLScalarType,
-  GraphQLDirective,
-  DirectiveLocation
-} = require("graphql");
+const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
 const { SchemaDirectiveVisitor } = require("graphql-tools");
 
 const validator = require("validator");

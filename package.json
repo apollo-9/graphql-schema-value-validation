@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
-    "format": "prettier --write \"**/*.js\""
+    "format": "npm run prettier --write \"**/*.js\"",
+    "prettier": "prettier \"**/*.js\"",
+    "lint": "eslint .",
+    "validate": "npm run lint && npm run prettier -- --list-different",
+    "precommit": "lint-staged"
   },
   "repository": {
     "url": "https://github.com/apollo-9/graphql-schema-value-validation"
@@ -13,7 +17,12 @@
   "author": "Apollo9",
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^5.10.0",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
     "prettier": "^1.15.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "eslint-config-prettier": "^3.3.0"
+  }
 }

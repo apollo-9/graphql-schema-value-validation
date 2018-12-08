@@ -1,9 +1,4 @@
-const {
-  GraphQLNonNull,
-  GraphQLScalarType,
-  GraphQLDirective,
-  DirectiveLocation
-} = require("graphql");
+const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
 const { SchemaDirectiveVisitor } = require("graphql-tools");
 
 const validator = require("validator");
@@ -41,8 +36,6 @@ class DateType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-        console.log(validator.isRFC3339(value, { strict: true }));
-
         if (!validator.isISO8601(value)) {
           throw new Error("Date string not valid");
         }
