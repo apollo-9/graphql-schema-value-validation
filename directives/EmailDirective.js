@@ -12,6 +12,10 @@ class EmailDirective extends SchemaDirectiveVisitor {
     this.wrapType(field);
   }
 
+  visitArgumentDefinition(field) {
+    this.wrapType(field);
+  }
+
   wrapType(field) {
     if (
       field.type instanceof GraphQLNonNull &&

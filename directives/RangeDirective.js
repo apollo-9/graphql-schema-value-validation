@@ -10,6 +10,10 @@ class RangeDirective extends SchemaDirectiveVisitor {
     this.wrapType(field);
   }
 
+  visitArgumentDefinition(field) {
+    this.wrapType(field);
+  }
+
   // Replace field.type with a custom GraphQLScalarType that enforces the
   // length restriction.
   wrapType(field) {
