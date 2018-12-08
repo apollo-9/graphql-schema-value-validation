@@ -1,6 +1,6 @@
 {
   "name": "graphql-schema-value-validation",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Exposes custom directives for doing validation in your schema",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "prettier": "prettier \"**/*.js\"",
     "lint": "eslint .",
     "validate": "npm run lint && npm run prettier -- --list-different",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepublish": "npm run validate"
   },
   "repository": {
     "url": "https://github.com/apollo-9/graphql-schema-value-validation"
