@@ -8,7 +8,8 @@
     "prettier": "prettier \"**/*.js\"",
     "lint": "eslint .",
     "validate": "npm run lint && npm run prettier -- --list-different",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "build": "npm run validate"
   },
   "repository": {
     "url": "https://github.com/apollo-9/graphql-schema-value-validation"
