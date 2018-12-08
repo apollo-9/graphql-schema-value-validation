@@ -3,10 +3,10 @@ const {
   GraphQLScalarType,
   GraphQLDirective,
   DirectiveLocation
-} = require('graphql');
-const { SchemaDirectiveVisitor } = require('graphql-tools');
+} = require("graphql");
+const { SchemaDirectiveVisitor } = require("graphql-tools");
 
-const validator = require('validator');
+const validator = require("validator");
 
 class DateDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -41,10 +41,10 @@ class DateType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-        console.log(validator.isRFC3339(value, {strict: true}));
+        console.log(validator.isRFC3339(value, { strict: true }));
 
         if (!validator.isISO8601(value)) {
-          throw new Error('Date string not valid');
+          throw new Error("Date string not valid");
         }
 
         return type.parseValue(value);

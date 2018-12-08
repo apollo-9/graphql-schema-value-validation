@@ -1,10 +1,7 @@
-const {
-  GraphQLNonNull,
-  GraphQLScalarType
-} = require('graphql');
-const { SchemaDirectiveVisitor } = require('graphql-tools');
+const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
+const { SchemaDirectiveVisitor } = require("graphql-tools");
 
-const validator = require('validator');
+const validator = require("validator");
 
 class UrlDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -39,9 +36,8 @@ class UrlType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-
         if (!validator.isURL(value)) {
-          throw new Error('URL not valid');
+          throw new Error("URL not valid");
         }
 
         return type.parseValue(value);

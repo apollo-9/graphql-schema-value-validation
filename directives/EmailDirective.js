@@ -3,10 +3,10 @@ const {
   GraphQLScalarType,
   GraphQLDirective,
   DirectiveLocation
-} = require('graphql');
-const { SchemaDirectiveVisitor } = require('graphql-tools');
+} = require("graphql");
+const { SchemaDirectiveVisitor } = require("graphql-tools");
 
-const validator = require('validator');
+const validator = require("validator");
 
 class EmailDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -41,9 +41,8 @@ class EmailType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-
         if (!validator.isEmail(value)) {
-          throw new Error('Email not valid');
+          throw new Error("Email not valid");
         }
 
         return type.parseValue(value);

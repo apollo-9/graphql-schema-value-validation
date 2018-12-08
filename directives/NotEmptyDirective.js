@@ -1,5 +1,5 @@
-const { GraphQLNonNull, GraphQLScalarType } = require('graphql');
-const { SchemaDirectiveVisitor } = require('graphql-tools');
+const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
+const { SchemaDirectiveVisitor } = require("graphql-tools");
 
 class NotEmptyDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -17,9 +17,7 @@ class NotEmptyDirective extends SchemaDirectiveVisitor {
       field.type instanceof GraphQLNonNull &&
       field.type.ofType instanceof GraphQLScalarType
     ) {
-      field.type = new GraphQLNonNull(
-        new NotEmptyType(field.type.ofType)
-      );
+      field.type = new GraphQLNonNull(new NotEmptyType(field.type.ofType));
     } else if (field.type instanceof GraphQLScalarType) {
       field.type = new NotEmptyType(field.type);
     } else {
@@ -42,10 +40,8 @@ class NotEmptyType extends GraphQLScalarType {
       },
 
       parseValue(value) {
-        if(!value){
-          throw new Error(
-            `Field's value can not be empty`
-          );
+        if (!value) {
+          throw new Error(`Field's value can not be empty`);
         }
 
         return type.parseValue(value);

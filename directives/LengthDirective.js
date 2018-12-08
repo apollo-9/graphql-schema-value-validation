@@ -1,6 +1,6 @@
-const { GraphQLNonNull, GraphQLScalarType } = require('graphql');
-const { SchemaDirectiveVisitor } = require('graphql-tools');
-const validator = require('validator');
+const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
+const { SchemaDirectiveVisitor } = require("graphql-tools");
+const validator = require("validator");
 
 class LengthDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {

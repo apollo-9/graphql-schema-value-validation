@@ -4,7 +4,8 @@
   "description": "Exposes custom directives for doing validation in your schema",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "format": "prettier --write \"**/*.js\""
   },
   "repository": {
     "url": "https://github.com/apollo-9/graphql-schema-value-validation"

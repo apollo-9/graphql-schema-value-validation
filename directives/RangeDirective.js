@@ -1,5 +1,5 @@
-const { GraphQLNonNull, GraphQLScalarType } = require('graphql');
-const { SchemaDirectiveVisitor } = require('graphql-tools');
+const { GraphQLNonNull, GraphQLScalarType } = require("graphql");
+const { SchemaDirectiveVisitor } = require("graphql-tools");
 
 class RangeDirective extends SchemaDirectiveVisitor {
   visitInputFieldDefinition(field) {
@@ -21,11 +21,7 @@ class RangeDirective extends SchemaDirectiveVisitor {
         new RangeType(field.type.ofType, this.args.min, this.args.max)
       );
     } else if (field.type instanceof GraphQLScalarType) {
-      field.type = new RangeType(
-        field.type,
-        this.args.min,
-        this.args.max
-      );
+      field.type = new RangeType(field.type, this.args.min, this.args.max);
     } else {
       throw new Error(`Not a scalar type: ${field.type}`);
     }
@@ -47,11 +43,11 @@ class RangeType extends GraphQLScalarType {
 
       parseValue(value) {
         if (value >= minValue && value < maxValue) {
-            return type.parseValue(value);
+          return type.parseValue(value);
         } else {
-            throw new Error(
-                `Field's value should be between ${minValue} and ${maxValue}`
-              );
+          throw new Error(
+            `Field's value should be between ${minValue} and ${maxValue}`
+          );
         }
       },
 
